@@ -74,12 +74,17 @@
             }
 
             $scope.deletarContato = (contatos) => {
-                let contatosSelecionados = contatos.filter((contato) => {
-                    if (contato.selecionado) {
+                $scope.contatos = contatos.filter((contato) => {
+                    if (!contato.selecionado) {
                         return contato;
                     }
                 })
-                console.log(contatosSelecionados)
+            }
+
+            $scope.isContatoSelecionado = (contatos) => {
+                return contatos.some((contato) => {
+                    return contato.selecionado;
+                })
             }
         })
     </script>
@@ -88,8 +93,7 @@
 <body ng-controller="listaTelefonicaController">
     <div class="jumbotron">
         <h4 class="text-center mb-4">{{ message }}</h4>
-        {{contatos}}
-        <table class="table table-striped">
+        <table class="table" ng-show="contatos.length > 0">
             <tr>
                 <th></th>
                 <th>Nome</th>
@@ -102,7 +106,6 @@
                 <td>{{ contato.telefone }}</td>
                 <td>{{ contato.operadora.nome }}</td>
             </tr>
-            {{contato}}
         </table>
         <hr>
         <input class="form-control mb-3" type="text" ng-model="contato.nome" placeholder="Nome">
@@ -113,7 +116,7 @@
         </select>
         <button class="btn btn-primary btn-block mt-3" ng-click="adicionarContato(contato)"
             ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
-        <button class="btn btn-danger btn-block mt-3" ng-click="deletarContato(contatos)">Deletar Contato</button>
+        <button class="btn btn-danger btn-block mt-3" ng-click="deletarContato(contatos)" ng-disabled="!isContatoSelecionado(contatos)">Deletar Contato</button>
     </div>
 </body>
 
