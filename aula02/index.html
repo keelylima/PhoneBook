@@ -72,6 +72,15 @@
                 //limpa os input
                 delete $scope.contato
             }
+
+            $scope.deletarContato = (contatos) => {
+                let contatosSelecionados = contatos.filter((contato) => {
+                    if (contato.selecionado) {
+                        return contato;
+                    }
+                })
+                console.log(contatosSelecionados)
+            }
         })
     </script>
 </head>
@@ -98,11 +107,13 @@
         <hr>
         <input class="form-control mb-3" type="text" ng-model="contato.nome" placeholder="Nome">
         <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone">
-        <select class="form-control mt-3" ng-model="contato.operadora" ng-options="operadora.nome for operadora in operadoras">
+        <select class="form-control mt-3" ng-model="contato.operadora"
+            ng-options="operadora.nome for operadora in operadoras">
             <option value="">Selecione uma Operadora</option>
         </select>
         <button class="btn btn-primary btn-block mt-3" ng-click="adicionarContato(contato)"
             ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
+        <button class="btn btn-danger btn-block mt-3" ng-click="deletarContato(contatos)">Deletar Contato</button>
     </div>
 </body>
 
