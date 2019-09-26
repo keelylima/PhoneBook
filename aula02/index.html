@@ -13,6 +13,14 @@
             max-width: 450px;
             margin: 0 auto;
         }
+
+        .selecionado {
+            background: red;
+        }
+
+        .negrito {
+            font-weight: bold;
+        }
     </style>
     <script>
         angular.module("listaTelefonica", []);
@@ -52,16 +60,6 @@
                     codigo: 41,
                     categoria: 'Celular'
                 },
-                {
-                    nome: 'GVT',
-                    codigo: 25,
-                    categoria: 'Fixo'
-                },
-                {
-                    nome: 'Embratel',
-                    codigo: 21,
-                    categoria: 'Fixo'
-                }
             ];
 
             //O ngModel, ele vai pegar da view (input) e jogar aqui pro controller/$scope
@@ -81,23 +79,26 @@
 <body ng-controller="listaTelefonicaController">
     <div class="jumbotron">
         <h4 class="text-center mb-4">{{ message }}</h4>
+        {{contatos}}
         <table class="table table-striped">
             <tr>
+                <th></th>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Operadora</th>
             </tr>
-            <tr ng-repeat="contato in contatos">
+            <tr ng-repeat="contato in contatos" ng-class="{ selecionado: contato.selecionado }">
+                <td><input type="checkbox" ng-model="contato.selecionado"></td>
                 <td>{{ contato.nome }}</td>
                 <td>{{ contato.telefone }}</td>
                 <td>{{ contato.operadora.nome }}</td>
             </tr>
+            {{contato}}
         </table>
-        {{contato}}
         <hr>
         <input class="form-control mb-3" type="text" ng-model="contato.nome" placeholder="Nome">
         <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone">
-        <select class="form-control mt-3" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+        <select class="form-control mt-3" ng-model="contato.operadora" ng-options="operadora.nome for operadora in operadoras">
             <option value="">Selecione uma Operadora</option>
         </select>
         <button class="btn btn-primary btn-block mt-3" ng-click="adicionarContato(contato)"
