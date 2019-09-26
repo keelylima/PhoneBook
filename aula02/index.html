@@ -7,18 +7,48 @@
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.css">
     <script src="lib/angularjs/angular.js"></script>
     <title>Lista Telefonica</title>
+    <style>
+        .jumbotron {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+    </style>
     <script>
         angular.module("listaTelefonica", []);
 
         // O $scope seria o garçom, medicação entre a view e o controller
         angular.module("listaTelefonica").controller("listaTelefonicaController", ($scope) => {
-            $scope.message = 'Eu sou um texto';
+            $scope.message = 'Lista Telefonica';
+            $scope.contatos = [
+                {
+                    nome: 'Kelly',
+                    telefone: '(11) 97952-4567'
+                },
+                {
+                    nome: 'Pedro',
+                    telefone: '(31) 97865-9876'
+                },
+                {
+                    nome: 'Claudia',
+                    telefone: '(12) 97654-3423'
+                }
+            ]
         })
     </script>
 </head>
 <body ng-controller="listaTelefonicaController">
-    <!-- Data binding -->
-    <h4 ng-bind="message"></h4>
-    
+    <div class="jumbotron">
+        <h4 class="text-center mb-4">{{ message }}</h4>
+        <table class="table table-striped">
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+            <tr ng-repeat="contato in contatos">
+                <td>{{ contato.nome }}</td>
+                <td>{{ contato.telefone }}</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
