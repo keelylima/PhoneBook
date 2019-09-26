@@ -35,14 +35,41 @@
                     nome: 'Claudia',
                     telefone: '(12) 97654-3423'
                 }
-            ]
+            ];
+            $scope.operadoras = [
+                {
+                    nome: 'Oi',
+                    codigo: 14,
+                    categoria: 'Celular'
+                },
+                {
+                    nome: 'Vivo',
+                    codigo: 15,
+                    categoria: 'Celular'
+                },
+                {
+                    nome: 'Tim',
+                    codigo: 41,
+                    categoria: 'Celular'
+                },
+                {
+                    nome: 'GVT',
+                    codigo: 25,
+                    categoria: 'Fixo'
+                },
+                {
+                    nome: 'Embratel',
+                    codigo: 21,
+                    categoria: 'Fixo'
+                }
+            ];
 
             //O ngModel, ele vai pegar da view (input) e jogar aqui pro controller/$scope
             $scope.adicionarContato = (contato) => {
 
                 //angular.copy é para criar uma cópia, após adicionar na lista, quando mexo nos inputs não altera o valor
                 $scope.contatos.push(angular.copy(contato));
-                
+
                 //delete é para deletar o objeto após a execução.
                 //limpa os input
                 delete $scope.contato
@@ -58,16 +85,23 @@
             <tr>
                 <th>Nome</th>
                 <th>Telefone</th>
+                <th>Operadora</th>
             </tr>
             <tr ng-repeat="contato in contatos">
                 <td>{{ contato.nome }}</td>
                 <td>{{ contato.telefone }}</td>
+                <td>{{ contato.operadora.nome }}</td>
             </tr>
         </table>
+        {{contato}}
         <hr>
         <input class="form-control mb-3" type="text" ng-model="contato.nome" placeholder="Nome">
         <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone">
-        <button class="btn btn-primary btn-block mt-3" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
+        <select class="form-control mt-3" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+            <option value="">Selecione uma Operadora</option>
+        </select>
+        <button class="btn btn-primary btn-block mt-3" ng-click="adicionarContato(contato)"
+            ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
     </div>
 </body>
 
