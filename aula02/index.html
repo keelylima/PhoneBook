@@ -38,11 +38,13 @@
             ]
 
             //O ngModel, ele vai pegar da view (input) e jogar aqui pro controller/$scope
-            $scope.adicionarContato = (nome, telefone) => {
-                $scope.contatos.push({
-                    nome: nome,
-                    telefone: telefone
-                })
+            $scope.adicionarContato = (contato) => {
+
+                //angular.copy é para criar uma cópia, após adicionar na lista, quando mexo nos inputs não altera o valor
+                $scope.contatos.push(angular.copy(contato));
+                
+                //delete é para deletar o objeto após a execução.
+                //delete $scope.contato
             }
         })
     </script>
@@ -62,9 +64,9 @@
             </tr>
         </table>
         <hr>
-        <input class="form-control mb-2" type="text" ng-model="nome" placeholder="Nome">
-        <input class="form-control" type="text" ng-model="telefone" placeholder="Telefone">
-        <button ng-click="adicionarContato(nome, telefone)">Adicionar Contato</button>
+        <input class="form-control mb-2" type="text" ng-model="contato.nome" placeholder="Nome">
+        <input class="form-control" type="text" ng-model="contato.telefone" placeholder="Telefone">
+        <button ng-click="adicionarContato(contato)">Adicionar Contato</button>
     </div>
 </body>
 
