@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="listaTelefonica">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,8 @@
 
         // O $scope seria o garçom, medicação entre a view e o controller
         angular.module("listaTelefonica").controller("listaTelefonicaController", ($scope) => {
+
+            //Binding, pega a informação daqui, do controller/$scope e joga pra view
             $scope.message = 'Lista Telefonica';
             $scope.contatos = [
                 {
@@ -33,9 +36,18 @@
                     telefone: '(12) 97654-3423'
                 }
             ]
+
+            //O ngModel, ele vai pegar da view (input) e jogar aqui pro controller/$scope
+            $scope.adicionarContato = () => {
+                $scope.contatos.push({
+                    nome: $scope.nome,
+                    telefone: $scope.telefone
+                })
+            }
         })
     </script>
 </head>
+
 <body ng-controller="listaTelefonicaController">
     <div class="jumbotron">
         <h4 class="text-center mb-4">{{ message }}</h4>
@@ -45,11 +57,15 @@
                 <th>Telefone</th>
             </tr>
             <tr ng-repeat="contato in contatos">
-              <td ng-repeat="(key, value) in contato">
-                  {{ key + ' ' + value }}
-              </td>
+                <td>{{ contato.nome }}</td>
+                <td>{{ contato.telefone }}</td>
             </tr>
         </table>
+        <hr>
+        <input class="form-control mb-2" type="text" ng-model="nome" placeholder="Nome">
+        <input class="form-control" type="text" ng-model="telefone" placeholder="Telefone">
+        <button ng-click="adicionarContato()">Adicionar Contato</button>
     </div>
 </body>
+
 </html>
