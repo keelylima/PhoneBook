@@ -1,0 +1,12 @@
+.jumbotron {
+    max-width: 450px;
+    margin: 50px auto;
+}
+
+.selecionado {
+    background: red;
+}
+
+.negrito {
+    font-weight: bold;
+}
