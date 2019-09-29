@@ -6,15 +6,18 @@
     $scope.contatos = [
         {
             nome: 'Kelly',
-            telefone: '(11) 97952-4567'
+            telefone: '(11) 97952-4567',
+            data: new Date()
         },
         {
             nome: 'Thalita',
-            telefone: '(31) 97865-9876'
+            telefone: '(31) 97865-9876',
+            data: new Date()
         },
         {
             nome: 'Claudia',
-            telefone: '(12) 97654-3423'
+            telefone: '(12) 97654-3423',
+            data: new Date()
         }
     ];
     $scope.operadoras = [
